@@ -1,0 +1,158 @@
+syntax = "proto3";
+import "src/protos/models.proto";
+import "google/protobuf/empty.proto";
+
+package tpa;
+
+service TPA {
+    /* Gets a list of `Team` objects, paginated in groups of 500. */
+    rpc getTeams(PageNum) returns (stream Team) {}
+    /* Gets a list of short form `Team_Simple` objects, paginated in groups of
+     * 500. */
+    rpc getTeamsSimple(PageNum) returns (stream Team_Simple) {}
+    /* Gets a list of Team keys, paginated in groups of 500. (Note, each page will
+     * not have 500 teams, but will include the teams within that range of 500.)
+     */
+    rpc getTeamsKeys(PageNum) returns (stream Response) {}
+    /* Gets a list of `Team` objects that competed in the given year, paginated in
+     * groups of 500. */
+    rpc getTeamsByYear(YearPageNum) returns (stream Team) {}
+    /* Gets a list of short form `Team_Simple` objects that competed in the given
+     * year, paginated in groups of 500. */
+    rpc getTeamsByYearSimple(YearPageNum) returns (stream Team_Simple) {}
+    /* Gets a list Team Keys that competed in the given year, paginated in groups
+     * of 500. */
+    rpc getTeamsByYearKeys(YearPageNum) returns (stream Response) {}
+    /* Gets a `Team` object for the team referenced by the given key. */
+    rpc getTeam(TeamKey) returns (Team) {}
+    /* Gets a `Team_Simple` object for the team referenced by the given key. */
+    rpc getTeamSimple(TeamKey) returns (Team_Simple) {}
+    /* Gets a list of years in which the team participated in at least one
+     * competition. */
+    rpc getTeamYearsParticipated(TeamKey) returns (stream Response) {}
+    /* Gets an array of districts representing each year the team was in a
+     * district. Will return an empty array if the team was never in a district.
+     */
+    rpc getTeamDistricts(TeamKey) returns (stream District_List) {}
+    /* Gets a list of year and robot name pairs for each year that a robot name
+     * was provided. Will return an empty array if the team has never named a
+     * robot. */
+    rpc getTeamRobots(TeamKey) returns (stream Team_Robot) {}
+    /* Gets a list of all events this team has competed at. */
+    rpc getTeamEvents(TeamKey) returns (stream Event) {}
+    /* Gets a short-form list of all events this team has competed at. */
+    rpc getTeamEventsSimple(TeamKey) returns (stream Event_Simple) {}
+    /* Gets a list of the event keys for all events this team has competed at. */
+    rpc getTeamEventsKeys(TeamKey) returns (stream Response) {}
+    /* Gets a list of events this team has competed at in the given year. */
+    rpc getTeamEventsByYear(TeamKeyYear) returns (stream Event) {}
+    /* Gets a short-form list of events this team has competed at in the given
+     * year. */
+    rpc getTeamEventsByYearSimple(TeamKeyYear) returns (stream Event_Simple) {}
+    /* Gets a list of the event keys for events this team has competed at in the
+     * given year. */
+    rpc getTeamEventsByYearKeys(TeamKeyYear) returns (stream Response) {}
+    /* Gets a list of matches for the given team and event. */
+    rpc getTeamEventMatches(TeamKeyEventKey) returns (stream Match) {}
+    /* Gets a short-form list of matches for the given team and event. */
+    rpc getTeamEventMatchesSimple(TeamKeyEventKey) returns (stream Match) {}
+    /* Gets a list of match keys for matches for the given team and event. */
+    rpc getTeamEventMatchesKeys(TeamKeyEventKey) returns (stream Response) {}
+    /* Gets a list of awards the given team won at the given event. */
+    rpc getTeamEventAwards(TeamKeyEventKey) returns (stream Award) {}
+    /* Gets the competition rank and status of the team at the given event. */
+    rpc getTeamEventStatus(TeamKeyEventKey) returns (Team_Event_Status) {}
+    /* Gets a list of awards the given team has won. */
+    rpc getTeamAwards(TeamKey) returns (stream Award) {}
+    /* Gets a list of awards the given team has won in a given year. */
+    rpc getTeamAwardsByYear(TeamKeyYear) returns (stream Award) {}
+    /* Gets a list of matches for the given team and year. */
+    rpc getTeamMatchesByYear(TeamKeyYear) returns (stream Match) {}
+    /* Gets a short-form list of matches for the given team and year. */
+    rpc getTeamMatchesByYearSimple(TeamKeyYear) returns (stream Match_Simple) {}
+    /* Gets a list of match keys for matches for the given team and year. */
+    rpc getTeamMatchesByYearKeys(TeamKeyYear) returns (stream Response) {}
+    /* Gets a list of Media (videos / pictures) for the given team and year. */
+    rpc getTeamMediaByYear(TeamKeyYear) returns (stream Media) {}
+    /* Gets a list of Media (videos / pictures) for the given team and tag. */
+    rpc getTeamMediaByTag(TeamKeyMediaTag) returns (stream Media) {}
+    /* Gets a list of Media (videos / pictures) for the given team, tag and year.
+     */
+    rpc getTeamMediaByTagYear(TeamKeyMediaTagYear) returns (stream Media) {}
+    /* Gets a list of Media (social media) for the given team. */
+    rpc getTeamSocialMedia(TeamKey) returns (stream Media) {}
+    /* Gets a list of events in the given year. */
+    rpc getEventsByYear(Year) returns (stream Event) {}
+    /* Gets a short-form list of events in the given year. */
+    rpc getEventsByYearSimple(Year) returns (stream Event_Simple) {}
+    /* Gets a list of event keys in the given year. */
+    rpc getEventsByYearKeys(Year) returns (stream Response) {}
+    /* Gets an Event. */
+    rpc getEvent(EventKey) returns (Event) {}
+    /* Gets a short-form Event. */
+    rpc getEventSimple(EventKey) returns (Event_Simple) {}
+    /* Gets a list of Elimination Alliances for the given Event. */
+    rpc getEventAlliances(EventKey) returns (stream Elimination_Alliance) {}
+    /* Gets a set of Event-specific insights for the given Event. */
+    rpc getEventInsights(EventKey) returns (Event_Insights) {}
+    /* Gets a set of Event OPRs (including OPR, DPR, and CCWM) for the given
+     * Event. */
+    rpc getEventOPRs(EventKey) returns (Event_OPRs) {}
+    /* Gets a list of team rankings for the Event. */
+    rpc getEventRankings(EventKey) returns (Event_Ranking) {}
+    /* Gets a list of team rankings for the Event. */
+    rpc getEventDistrictPoints(EventKey) returns (Event_District_Points) {}
+    /* Gets a list of `Team` objects that competed in the given event. */
+    rpc getEventTeams(EventKey) returns (stream Team) {}
+    /* Gets a short-form list of `Team` objects that competed in the given event.
+     */
+    rpc getEventTeamsSimple(EventKey) returns (stream Team_Simple) {}
+    /* Gets a list of `Team` keys that competed in the given event. */
+    rpc getEventTeamsKeys(EventKey) returns (stream Response) {}
+    /* Gets a list of matches for the given event. */
+    rpc getEventMatches(EventKey) returns (stream Match) {}
+    /* Gets a short-form list of matches for the given event. */
+    rpc getEventMatchesSimple(EventKey) returns (stream Match_Simple) {}
+    /* Gets a list of match keys for the given event. */
+    rpc getEventMatchesKeys(EventKey) returns (stream Response) {}
+    /* Gets an array of Match Keys for the given event key that have timeseries
+     *data. Returns an empty array if no matches have timeseries data. WARNING:*
+     *This is *not* official data, and is subject to a significant possibility of
+     *error, or missing data. Do not rely on this data for any purpose. In fact,
+     *pretend we made it up.
+     *WARNING:* This endpoint and corresponding data models are under *active
+     *development* and may change at any time, including in breaking ways. */
+    rpc getEventMatchTimeseries(EventKey) returns (stream Response) {}
+    /* Gets a list of awards from the given event. */
+    rpc getEventAwards(EventKey) returns (stream Award) {}
+    /* Gets a `Match` object for the given match key. */
+    rpc getMatch(MatchKey) returns (Match) {}
+    /* Gets a short-form `Match` object for the given match key. */
+    rpc getMatchSimple(MatchKey) returns (Match_Simple) {}
+    /* Gets Zebra MotionWorks data for a Match for the given match key. */
+    rpc getMatchZebra(MatchKey) returns (Zebra) {}
+    /* Gets a list of districts and their corresponding district key, for the
+     * given year. */
+    rpc getDistrictsByYear(Year) returns (stream District_List) {}
+    /* Gets a list of events in the given district. */
+    rpc getDistrictEvents(DistrictKey) returns (stream Event) {}
+    /* Gets a short-form list of events in the given district. */
+    rpc getDistrictEventsSimple(DistrictKey) returns (stream Event_Simple) {}
+    /* Gets a list of event keys for events in the given district. */
+    rpc getDistrictEventsKeys(DistrictKey) returns (stream Response) {}
+    /* Gets a list of `Team` objects that competed in events in the given
+     * district. */
+    rpc getDistrictTeams(DistrictKey) returns (stream Team) {}
+    /* Gets a short-form list of `Team` objects that competed in events in the
+     * given district. */
+    rpc getDistrictTeamsSimple(DistrictKey) returns (stream Team_Simple) {}
+    /* Gets a list of `Team` objects that competed in events in the given
+     * district. */
+    rpc getDistrictTeamsKeys(DistrictKey) returns (stream Response) {}
+    /* Gets a list of team district rankings for the given district. */
+    rpc getDistrictRankings(DistrictKey) returns (stream District_Ranking) {}
+  
+    // Custom fns
+    rpc getAllTeamsByYear(Year) returns (stream Team) {}
+    rpc getAllTeams(google.protobuf.Empty) returns (stream Team) {}
+  }
