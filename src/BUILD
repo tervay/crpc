@@ -12,8 +12,10 @@ cc_binary(
 cc_binary(
     name = "main2",
     srcs = ["main2.cc"],
+    linkopts = ["-ldl"],
     deps = [
         "//src/include:HTTPRequest",
         "@com_google_absl//absl/strings:str_format",
+        "@cpr",
     ],
 )

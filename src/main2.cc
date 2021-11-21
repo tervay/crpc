@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "absl/strings/str_format.h"
-#include "include/HTTPRequest.hpp"
+#include "cpr/cpr.h"
 
 const std::string TBA_URL = "https://www.thebluealliance.com/api/v3";
 const std::string TBA_KEY =
@@ -13,14 +13,12 @@ std::string make_url(std::string endpoint) {
   return absl::StrFormat("%s/%s", TBA_URL, endpoint);
 }
 
-http::Request make_request(std::string endpoint) {
-  http::Request req(make_url(endpoint));
-  return req;
+cpr::Response make_request(std::string endpoint) {
+  return cpr::Get(cpr::Url{make_url(endpoint)},
+                  cpr::Header{{"X-TBA-Auth-Key", TBA_KEY}});
 }
 
 int main() {
   auto req = make_request("team/frc2713");
-  const auto response = req.send("GET");
-  std::cout << std::string{response.body.begin(), response.body.end()}
-            << '\n'; // print the result
+  std::cout << req.text << std::endl;
 }

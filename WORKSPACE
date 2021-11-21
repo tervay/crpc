@@ -1,4 +1,5 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "rules_proto_grpc",
@@ -51,3 +52,62 @@ http_archive(
     strip_prefix = "benchmark-bf585a2789e30585b4e3ce6baf11ef2750b54677",
     urls = ["https://github.com/google/benchmark/archive/bf585a2789e30585b4e3ce6baf11ef2750b54677.zip"],
 )
+
+http_archive(
+    name = "cpr",
+    build_file = "//src/include/cpr:BUILD",
+    # sha256 = "656ee0b0d6d79280a0aa6f58c08bb2afdc0b67fd745c3c405b3453bd195e14dd",
+    strip_prefix = "cpr-f4622efcb59d84071ae11404ae61bd821c1c344b",
+    urls = [
+        "https://github.com/Unilang/cpr/archive/f4622efcb59d84071ae11404ae61bd821c1c344b.tar.gz",
+    ],
+)
+
+http_archive(
+    name = "curl",
+    build_file = "//src/include/curl:BUILD",
+    patches = [
+        "//src/include/curl/patches:p1.patch",
+    ],
+    sha256 = "3f6c54fb691853e9b00ed484ea2f52566c7af172ecd48cd9eeec8041a9ac679b",
+    strip_prefix = "curl-11974ac859c5d82def59e837e0db56fef7f6794e",
+    urls = [
+        "https://github.com/Unilang/curl/archive/11974ac859c5d82def59e837e0db56fef7f6794e.tar.gz",
+    ],
+)
+
+http_archive(
+    name = "zlib",
+    build_file = "//src/include/zlib:BUILD",
+    sha256 = "6d4d6640ca3121620995ee255945161821218752b551a1a180f4215f7d124d45",
+    strip_prefix = "zlib-cacf7f1d4e3d44d871b605da3b647f07d718623f",
+    urls = [
+        "https://github.com/Unilang/zlib/archive/cacf7f1d4e3d44d871b605da3b647f07d718623f.tar.gz",
+    ],
+)
+
+http_archive(
+    name = "openssl",
+    build_file = "//src/include/openssl:BUILD",
+    patches = ["//src/include/openssl/patches:p1.patch"],
+    sha256 = "fb6b5de486f1739dc34f2854a0c8f94d13c130eb9c4876cad73b3d40996f8ba6",
+    strip_prefix = "openssl-OpenSSL_1_1_1",
+    urls = [
+        "https://github.com/unilang/openssl/archive/OpenSSL_1_1_1.tar.gz",
+        "https://github.com/openssl/openssl/archive/OpenSSL_1_1_1.tar.gz",
+    ],
+)
+
+# git_repository(
+#     name = "com_curoky_rules_pkg",
+#     branch = "master",
+#     remote = "https://github.com/curoky/rules_cc",
+# )
+
+# load("@com_curoky_rules_pkg//:rules_dependencies.bzl", "pkg_rules_dependencies")
+
+# pkg_rules_dependencies()
+
+# load("@com_curoky_rules_pkg//:register_toolchains.bzl", "pkg_register_toolchains")
+
+# pkg_register_toolchains()
