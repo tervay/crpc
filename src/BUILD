@@ -15,6 +15,7 @@ cc_binary(
     linkopts = ["-ldl"],
     deps = [
         "//src/include:HTTPRequest",
+        "//src/tba",
         "@com_google_absl//absl/strings:str_format",
         "@cpr",
     ],

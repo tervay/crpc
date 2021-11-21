@@ -1,6 +1,23 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
+new_local_repository(
+    name = "boringssl",
+    build_file_content = """
+cc_library(
+  name = "ssl",
+  linkopts = ["-lssl", "-lcrypto"],
+  visibility = ["//visibility:public"],
+),
+cc_library(
+  name = "crypto",
+  linkopts = ["-lssl", "-lcrypto"],
+  visibility = ["//visibility:public"],
+)
+""",
+    path = "/usr/lib/x86_64-linux-gnu",
+)
+
 http_archive(
     name = "rules_proto_grpc",
     sha256 = "28724736b7ff49a48cb4b2b8cfa373f89edfcb9e8e492a8d5ab60aa3459314c8",

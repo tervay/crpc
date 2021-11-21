@@ -4,6 +4,7 @@
 
 #include "absl/strings/str_format.h"
 #include "cpr/cpr.h"
+#include "tba/tba.h"
 
 const std::string TBA_URL = "https://www.thebluealliance.com/api/v3";
 const std::string TBA_KEY =
