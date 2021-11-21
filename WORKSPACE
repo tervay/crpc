@@ -30,8 +30,8 @@ grpc_deps()
 
 http_archive(
     name = "com_google_absl",
-    strip_prefix = "abseil-cpp-98eb410c93ad059f9bba1bf43f5bb916fc92a5ea",
-    urls = ["https://github.com/abseil/abseil-cpp/archive/98eb410c93ad059f9bba1bf43f5bb916fc92a5ea.zip"],
+    strip_prefix = "abseil-cpp-72c765111173a61de6e4184bb837f855b7869952",
+    urls = ["https://github.com/abseil/abseil-cpp/archive/72c765111173a61de6e4184bb837f855b7869952.zip"],
 )
 
 http_archive(
@@ -111,3 +111,18 @@ http_archive(
 # load("@com_curoky_rules_pkg//:register_toolchains.bzl", "pkg_register_toolchains")
 
 # pkg_register_toolchains()
+
+# Hedron's Compile Commands Extractor for Bazel
+# https://github.com/hedronvision/bazel-compile-commands-extractor
+http_archive(
+    name = "hedron_compile_commands",
+    strip_prefix = "bazel-compile-commands-extractor-9d8b3d5925728c3206010ed0062826a9faaebc2c",
+
+    # Replace the commit hash in both places (below) with the latest.
+    # Even better, set up Renovate and let it do the work for you (see "Suggestion: Updates" below).
+    url = "https://github.com/hedronvision/bazel-compile-commands-extractor/archive/9d8b3d5925728c3206010ed0062826a9faaebc2c.tar.gz",
+)
+
+load("@hedron_compile_commands//:workspace_setup.bzl", "hedron_compile_commands_setup")
+
+hedron_compile_commands_setup()
