@@ -7,6 +7,28 @@ enum Color {
   RED = 0; BLUE = 1;
 }
 
+message Coordinates {
+  double latitude = 1;
+  double longitude = 2;
+}
+message Region {
+  string name = 1;
+  string color = 2;
+}
+message Location {
+  string city = 1;
+  string state_prov = 2;
+  string country = 3;
+  string address = 4;
+  string postal_code = 5;
+  string gmaps_place_id = 6;
+  string gmaps_url = 7;
+  string name = 8;
+  string timezone = 9;
+  Coordinates coordinates = 10;
+  Region region = 11;
+}
+
 message API_Status {
   int32 current_season = 1;
   int32 max_season = 2;
@@ -19,41 +41,18 @@ message API_Status_App_Version {
   int32 min_app_version = 1;
   int32 latest_app_version = 2;
 }
-message Region {
-  string name = 1;
-  string color = 2;
-}
-message Team_Simple {
-  string key = 1;
-  int32 team_number = 2;
-  string nickname = 3;
-  string name = 4;
-  string city = 5;
-  string state_prov = 6;
-  string country = 7;
-}
 message Team {
   string key = 1;
   int32 team_number = 2;
   string nickname = 3;
   string name = 4;
   string school_name = 5;
-  string city = 6;
-  string state_prov = 7;
-  string country = 8;
-  string address = 9;
-  string postal_code = 10;
-  string gmaps_place_id = 11;
-  string gmaps_url = 12;
-  double lat = 13;
-  double lng = 14;
-  string location_name = 15;
-  string website = 16;
-  int32 rookie_year = 17;
-  string motto = 18;
-  map<string, string> home_championship = 19;
-  map<int32, double> yearly_elos = 20;
-  Region region = 21;
+  string website = 6;
+  int32 rookie_year = 7;
+  string motto = 8;
+  map<string, string> home_championship = 9;
+  map<int32, double> yearly_elos = 10;
+  Location location = 11;
 }
 message Team_Robot {
   int32 year = 1;
@@ -61,42 +60,18 @@ message Team_Robot {
   string key = 3;
   string team_key = 4;
 }
-message Event_Simple {
-  string key = 1;
-  string name = 2;
-  string event_code = 3;
-  int32 event_type = 4;
-  District_List district = 5;
-  string city = 6;
-  string state_prov = 7;
-  string country = 8;
-  string start_date = 9;
-  string end_date = 10;
-  int32 year = 11;
-}
 message Event {
   string key = 1;
   string name = 2;
   string event_code = 3;
   int32 event_type = 4;
   District_List district = 5;
-  string city = 6;
-  string state_prov = 7;
-  string country = 8;
   string start_date = 9;
   string end_date = 10;
   int32 year = 11;
   string short_name = 12;
   string event_type_string = 13;
   int32 week = 14;
-  string address = 15;
-  string postal_code = 16;
-  string gmaps_place_id = 17;
-  string gmaps_url = 18;
-  double lat = 19;
-  double lng = 20;
-  string location_name = 21;
-  string timezone = 22;
   string website = 23;
   string first_event_id = 24;
   string first_event_code = 25;
@@ -293,26 +268,6 @@ message Event_OPRs {
   map<string, float> oprs = 1;
   map<string, float> dprs = 2;
   map<string, float> ccwms = 3;
-}
-
-message Match_Simple {
-  string key = 1;
-  string comp_level = 2;
-  int32 set_number = 3;
-  int32 match_number = 4;
-  message Alliances {
-    Match_alliance red = 1;
-    Match_alliance blue = 2;
-    Match_alliance winner = 3;
-    Match_alliance loser = 4;
-    repeated Match_alliance tied = 5;
-  }
-  Alliances alliances = 5;
-  string winning_alliance = 6;
-  string event_key = 7;
-  int32 time = 8;
-  int32 predicted_time = 9;
-  int32 actual_time = 10;
 }
 message Match {
   string key = 1;
