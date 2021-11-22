@@ -1,9 +1,14 @@
 #include "cpr/cpr.h"
+#include "src/include/json/json.hpp"
 #include "src/protos/tpa.grpc.pb.h"
+
+using JSON = nlohmann::json;
 
 namespace tba {
 namespace models {
-tpa::Team json_to_team(std::string json) {
+JSON parse_json(std::string json) { return JSON::parse(json); }
+
+tpa::Team json_to_team(JSON json) {
   tpa::Team team;
   team.set_key(json);
   return team;
