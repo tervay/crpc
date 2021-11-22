@@ -1,23 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-new_local_repository(
-    name = "boringssl",
-    build_file_content = """
-cc_library(
-  name = "ssl",
-  linkopts = ["-lssl", "-lcrypto"],
-  visibility = ["//visibility:public"],
-),
-cc_library(
-  name = "crypto",
-  linkopts = ["-lssl", "-lcrypto"],
-  visibility = ["//visibility:public"],
-)
-""",
-    path = "/usr/lib/x86_64-linux-gnu",
-)
-
 http_archive(
     name = "rules_proto_grpc",
     sha256 = "28724736b7ff49a48cb4b2b8cfa373f89edfcb9e8e492a8d5ab60aa3459314c8",
@@ -85,8 +68,9 @@ http_archive(
     build_file = "//src/include/curl:BUILD",
     patches = [
         "//src/include/curl/patches:p1.patch",
+        "//src/include/curl/patches:p2.patch",
     ],
-    sha256 = "3f6c54fb691853e9b00ed484ea2f52566c7af172ecd48cd9eeec8041a9ac679b",
+    # sha256 = "3f6c54fb691853e9b00ed484ea2f52566c7af172ecd48cd9eeec8041a9ac679b",
     strip_prefix = "curl-11974ac859c5d82def59e837e0db56fef7f6794e",
     urls = [
         "https://github.com/Unilang/curl/archive/11974ac859c5d82def59e837e0db56fef7f6794e.tar.gz",

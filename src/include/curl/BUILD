@@ -303,8 +303,8 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "@zlib",
-        "@openssl//:crypto",
-        "@openssl//:ssl",
+        "@boringssl//:crypto",
+        "@boringssl//:ssl",
     ],
 )
 
