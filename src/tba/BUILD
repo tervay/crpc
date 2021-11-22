@@ -5,7 +5,7 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "//src/protos:models_cpp",
-        "//src/protos:tba_cpp",
+        "//src/protos:tpa_cpp",
         "@cpr",
     ],
 )

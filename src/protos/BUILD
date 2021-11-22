@@ -17,9 +17,9 @@ cpp_grpc_library(
 )
 
 proto_library(
-    name = "tba",
+    name = "tpa",
     srcs = [
-        "tba.proto",
+        "tpa.proto",
     ],
     visibility = ["//visibility:public"],
     deps = [
@@ -29,8 +29,8 @@ proto_library(
 )
 
 cpp_grpc_library(
-    name = "tba_cpp",
-    protos = [":tba"],
+    name = "tpa_cpp",
+    protos = [":tpa"],
     visibility = ["//visibility:public"],
     deps = [
         ":models_cpp",
