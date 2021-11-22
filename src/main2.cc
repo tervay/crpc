@@ -20,6 +20,8 @@ cpr::Response make_request(std::string endpoint) {
 }
 
 int main() {
-  auto req = make_request("team/frc2713");
-  std::cout << req.text << std::endl;
+  // auto req = make_request("team/frc2713");
+  // std::cout << req.text << std::endl;
+
+  std::cout << tba::team("frc2713").DebugString() << std::endl;
 }
